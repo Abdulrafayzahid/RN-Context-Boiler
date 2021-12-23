@@ -1,0 +1,3 @@
+export const INCREASE_LIKE = 'INCREASE_LIKE';
+
+export const INCREASE_COMMENT = 'INCREASE_COMMENT';

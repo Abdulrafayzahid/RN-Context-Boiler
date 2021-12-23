@@ -1,21 +1,28 @@
-import React, {useRef} from 'react';
-import {Text, View} from 'react-native';
-import {FONTS} from '../constants';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {FONTS, SIZES} from '../constants';
+import {withAppContext} from '../context';
 import Increment from './increment';
 
-const ShowCount = React.memo(({
-  likeCount,
-  likeIncrement,
-  commentIncrement,
-}) => {
-  const render = useRef(0);
+const ShowCount = React.memo(props => {
+  const {
+    store: {likeCount, commentCount},
+  } = props;
   return (
     <View>
-      <Text style={{...FONTS.h3}}> {likeCount} </Text>
-      <Text style={{...FONTS.h3}}> Render {render.current++} </Text>
-      <Increment likeIncrement={likeIncrement} commentIncrement={commentIncrement} />
+      <Text style={styles.sectionTitle}>Comment Count {commentCount}</Text>
+      <Text style={styles.sectionTitle}>Like Count {likeCount} </Text>
+      <Increment />
     </View>
   );
-})
+});
 
-export default ShowCount;
+const styles = StyleSheet.create({
+  sectionTitle: {
+    ...FONTS.h1,
+    textAlign: 'center',
+    marginVertical: SIZES.padding
+  },
+});
+
+export default withAppContext(ShowCount);
